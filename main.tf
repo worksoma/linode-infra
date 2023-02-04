@@ -30,11 +30,11 @@ provider "linode" {
 }
 
 resource "linode_instance" "workportal-server" {
-  image           = "linode/centos-stream9"
+  image           = "linode/almalinux9"
   label           = "workportal-server"
   group           = "Terraform-managed"
   region          = "ca-central"
-  type            = "g6-standard-1"
+  type            = "g6-nanode-1"
   authorized_keys = [var.ssh-pubkey]
   root_pass       = var.root-password
 
@@ -50,6 +50,6 @@ resource "linode_instance" "workportal-server" {
   }
 
   provisioner "local-exec" {
-    command = "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i '${linode_instance.workportal-server.ip_address},' -u root ../workportal-server/rhel-playbook.yml"
+    command = "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i '${linode_instance.workportal-server.ip_address},' -u root ../server/rhel-playbook.yml"
   }
 }
