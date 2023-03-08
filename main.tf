@@ -30,7 +30,7 @@ provider "linode" {
 }
 
 resource "linode_instance" "workportal-server" {
-  image           = "linode/almalinux9"
+  image           = "linode/centos-stream9"
   label           = "workportal-server"
   group           = "Terraform-managed"
   region          = "ca-central"
