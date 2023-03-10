@@ -4,8 +4,13 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'echo fun'
-		sh 'git clone https://github.com/worksoma/server.git'
+		sh '''
+echo $PWD
+git clone https://github.com/worksoma/server.git 
+cp ~/.sensitive/terraform.tfvars .
+cp ~/.sensitive/sensitive.vars.yml ../server/
+cp ~/.sensitive/htpasswd ../server/files
+		'''
             }
         }
 
